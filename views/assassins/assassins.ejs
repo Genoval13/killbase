@@ -1,0 +1,35 @@
+<% include ../partials/header.ejs %>
+<body>
+    <h1>Current Assassins</h1>
+    <div class='table'>
+        <table>
+            <thead>
+                <colgroup span="8"></colgroup>
+                <th>Assassin ID</th>
+                <th>Assassin Name</th>
+                <th>Code Name</th>
+                <th>Weapon</th>
+                <th>Age</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Kills</th>
+            </thead>
+            <% assassins.forEach(function(assassins){ %>
+            <tbody>
+                <tr>
+                    <td><%= assassins.Assassin_ID%></td>
+                    <td><%= assassins.Assassin_Name %></td>
+                    <td><%= assassins.Code_Name %></td>
+                    <td><%= assassins.Weapon %></td>
+                    <td><%= assassins.Age %></td>
+                    <td><%= assassins.Min_Price %></td>
+                    <td><%= assassins.Rating %></td>
+                    <td><%= assassins.Kills %></td>
+                </tr>
+            </tbody>
+            <% })%>
+        </table>
+    </div>
+   <% include ../partials/mainButtons.ejs %>
+</body>
+</html>
