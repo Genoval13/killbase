@@ -1,0 +1,23 @@
+.table {
+    border: 1px solid black;
+
+}
+
+h1 {
+    text-align: center;
+}
+
+.heading {
+    text-align: center;
+}
+
+.targetImg {
+    width: 300px;
+    height: 300px;
+}
+
+.indexImg {
+    height: 300px;
+    width: 200px;
+    align-items: center;
+}

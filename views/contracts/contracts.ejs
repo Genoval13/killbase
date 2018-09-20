@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contracts Page</title>
+    <link rel="stylesheet" href="style.css">
+    <% include ../partials/header.ejs %>
 </head>
 <body>
-    
+    <h1 style='text-align: center'>Current Contracts</h1>
+    <div class='table'>
+        <table style="align: center">
+            <thead>
+                <colgroup span="8"></colgroup>
+                <th>Contract ID</th>
+                <th>Target Name</th>
+                <th>Target Location</th>
+                <th>Target Photo</th>
+                <th>Target Security</th>
+                <th>Client Name</th>
+                <th>Budget</th>
+                <th>Completed By</th>
+            </thead>
+            <% contracts.forEach(function(contracts){ %>
+            <tbody>
+                <tr>
+                    <td><%= contracts.Contract_ID %></td>
+                    <td><%= contracts.Target_Name %></td>
+                    <td><%= contracts.Target_Location %></td>
+                    <td><img class="targetImg" src="<%= contracts.Target_Img %>" alt=""> </td>
+                    <td><%= contracts.Target_Security %></td>
+                    <td><%= contracts.Client_Name %></td>
+                    <td><%= contracts.Budget %></td>
+                    <td><%= contracts.By_Whom %></td>
+                </tr>
+            </tbody>
+            <% })%>
+        </table>
+    </div>
+    <% include ../partials/mainButtons.ejs %>
 </body>
 </html>

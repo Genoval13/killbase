@@ -7,10 +7,11 @@ exports.up = function(knex, Promise) {
       table.integer('Budget');
       table.boolean('Completed');
       table.string('By_Whom');
-  // }).then((res) => {
-  //   return knex('contracts')
-  //       .join('Targets', 'contracts.Targets_ID', '=', 'Targets.Target_Name');
-  //       // .join('Clients', 'contracts.Client_ID', 'Clients.Client_Name');
+  }).then((res) => {
+    return knex('contracts')
+    //     .select('targets.Target_Name')
+    //     .join('targets', 'contracts.Targets_ID', '=', 'targets.Target_ID');
+        // .join('Clients', 'contracts.Client_ID', 'Clients.Client_Name');
   })
 };
 

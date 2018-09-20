@@ -28,10 +28,20 @@ app.get('/assassins', (_req, res) => {
     })
 })
 
+app.get('/contracts', (_req, res) => {
+    knex('contracts')
+    .join('targets', 'targets.Target_ID', 'contracts.Contract_ID')
+    .join('clients', 'clients.Client_ID', 'contracts.Contract_ID')
+    .orderBy('Contract_ID')
+    .then((contracts) => {
+        res.render('contracts/contracts', {title: 'Contracts Table', contracts});
+    })
+})
+
 app.use(assassins);
 app.use(targets);
 app.use(clients);
-app.use(contracts);
+// app.use(contracts);
 
 app.use(function (_req, res) {
     res.sendStatus(404)
