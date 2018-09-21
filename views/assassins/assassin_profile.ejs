@@ -8,7 +8,7 @@
     <% include ../partials/header.ejs %>
 </head>
 <body>
-    <h1>Current Assassins</h1>
+    <h1><%= assassins.Assassin_Name %>'s Profile</h1>
     <% include ../partials/mainButtons.ejs %>
     <div class='table'>
         <table>
@@ -23,10 +23,9 @@
                 <th>Rating</th>
                 <th>Kills</th>
             </thead>
-            <% assassins.forEach(function(assassins){ %>
             <tbody>
                 <tr>
-                    <td><a href="/assassins/<%= assassins.Assassin_ID %>"><button><%= assassins.Assassin_ID %></button></a></td>
+                    <td><%= assassins.Assassin_ID%></td>
                     <td><%= assassins.Assassin_Name %></td>
                     <td><%= assassins.Code_Name %></td>
                     <td><%= assassins.Weapon %></td>
@@ -36,9 +35,8 @@
                     <td><%= assassins.Kills %></td>
                 </tr>
             </tbody>
-            <% })%>
         </table>
     </div>
-    <a href="/assassins_post"><button>Add New Assassin</button></a>
+    <a href="/assassins/patch/<%= assassins.Assassin_ID %>"><button>Edit Assassin</button></a>
 </body>
 </html>

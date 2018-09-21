@@ -2,16 +2,13 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 
-router.get('/assassins', (_req, res, next) => {
+router.get('/assassins', (_req, res) => {
     knex('assassins')
-        .orderBy('Assassin_ID')
-        .then((assassins) => {
-            res.send(assassins);
-        })
-        .catch((err) => {
-            next(err);
-        });
-});
+    .orderBy('Assassin_ID', 'asc')
+    .then((assassins) => {
+        res.render('assassins/assassins', {title: 'Assassins Table', assassins});
+    })
+})
 
 router.get('/assassins/:Assassin_ID', (req, res, next) => {
     knex('assassins')
@@ -22,25 +19,35 @@ router.get('/assassins/:Assassin_ID', (req, res, next) => {
                 return next();
             }
 
-            res.send(assassins);
+            res.render(`assassins/assassin_profile`, {title: `${assassins.Assassin_Name} Profile`, assassins});
         })
         .catch((err) => {
             next(err);
         });
 });
 
-router.post('/assassins', (req, res, next) => {
+router.get('/assassins_post', (_req, res, _next) => {
+    res.render('assassins/assassins_post', {title: `Create New Assassin`});
+})
+
+router.post('/assassins/add', (req, res, next) => {
     knex('assassins')
         .insert({Assassin_Name: req.body.Assassin_Name, Code_Name: req.body.Code_Name, Weapon: req.body.Weapon, Age: req.body.Age, Min_Price: req.body.Min_Price, Rating: req.body.Rating, Kills: req.body.Kills}, '*')
-        .then((assassins) => {
-            res.send(assassins);
+        .then(() => {
+            knex('assassins')
+            .orderBy('Assassin_ID', 'asc')
+            .then((assassins) => {
+                res.render('assassins/assassins', {title: 'Assassins Table', assassins});
+            })
         })
         .catch((err) => {
             next(err);
         });
 });
 
-router.patch('/assassins/:Assassin_ID', (req, res, next) => {
+
+
+router.patch('/assassins/patch/:Assassin_ID', (req, res, next) => {
     knex('assassins')
     .where('Assassin_ID', req.params.Assassin_ID)
     .first()
@@ -55,7 +62,7 @@ router.patch('/assassins/:Assassin_ID', (req, res, next) => {
                 .update({Assassin_Name: req.body.Assassin_Name, Code_Name: req.body.Code_Name, Weapon: req.body.Weapon, Age: req.body.Age, Min_Price: req.body.Min_Price, Rating: req.body.Rating, Kills: req.body.Kills}, '*')
         })
         .then((assassins) => {
-            res.send(assassins)
+            res.render('assassins/assassins_edit', {title: `${assassins.Assassin_Name} Edit`, assassins});
         })
         .catch((err) => {
             next(err);

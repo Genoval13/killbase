@@ -14,34 +14,18 @@ const contracts = require('./routes/contracts');
 app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(express.static(path.join('public')));
+
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (_req, res) => {
     res.render('index', {title: 'Kill Base'});
 })
 
-app.get('/assassins', (_req, res) => {
-    knex('assassins')
-    .orderBy('Assassin_ID', 'asc')
-    .then((assassins) => {
-        res.render('assassins/assassins', {title: 'Assassins Table', assassins});
-    })
-})
-
-app.get('/contracts', (_req, res) => {
-    knex('contracts')
-    .join('targets', 'targets.Target_ID', 'contracts.Contract_ID')
-    .join('clients', 'clients.Client_ID', 'contracts.Contract_ID')
-    .orderBy('Contract_ID')
-    .then((contracts) => {
-        res.render('contracts/contracts', {title: 'Contracts Table', contracts});
-    })
-})
-
 app.use(assassins);
 app.use(targets);
 app.use(clients);
-// app.use(contracts);
+app.use(contracts);
 
 app.use(function (_req, res) {
     res.sendStatus(404)

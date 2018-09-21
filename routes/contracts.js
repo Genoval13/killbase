@@ -2,16 +2,15 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 
-router.get('/contracts', (_req, res, next) => {
+router.get('/contracts', (_req, res) => {
     knex('contracts')
-        .orderBy('Contract_ID')
-        .then((contracts) => {
-            res.send(contracts);
-        })
-        .catch((err) => {
-            next(err);
-        });
-});
+    .join('targets', 'targets.Target_ID', 'contracts.Contract_ID')
+    .join('clients', 'clients.Client_ID', 'contracts.Contract_ID')
+    .orderBy('Contract_ID')
+    .then((contracts) => {
+        res.render('contracts/contracts', {title: 'Contracts Table', contracts});
+    })
+})
 
 router.get('/contracts/:Contract_ID', (req, res, next) => {
     knex('contracts')

@@ -1,6 +1,5 @@
 .table {
     border: 1px solid black;
-
 }
 
 h1 {
@@ -17,7 +16,13 @@ h1 {
 }
 
 .indexImg {
-    height: 300px;
-    width: 200px;
-    align-items: center;
+    height: 700px;
+    width: 700px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.nav {
+    transform: translate(600px)
 }
