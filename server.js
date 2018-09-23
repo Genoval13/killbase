@@ -12,6 +12,7 @@ const clients = require('./routes/clients');
 const contracts = require('./routes/contracts');
 
 app.disable('x-powered-by');
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static(path.join('public')));
 
