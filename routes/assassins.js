@@ -4,7 +4,7 @@ const knex = require('../db/knex');
 
 router.get('/assassins', (_req, res) => {
     knex('assassins')
-    .orderBy('Assassin_ID', 'asc')
+    .orderBy('Assassienen_ID', 'asc')
     .then((assassins) => {
         res.render('assassins/assassins', {title: 'Assassins Table', assassins});
     })
